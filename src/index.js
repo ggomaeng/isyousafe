@@ -57,8 +57,8 @@ function Content() {
     <>
       <Block factor={1} offset={0}>
         <Block factor={1.2}>
-          <Text left size={w * 0.15} position={[-w / 3.2, 0.5, -1]} color="#d40749">
-            MOKSHA
+          <Text left size={w * 0.1} position={[-w / 2.2, 0.5, -1]} color="#01ff00">
+            ISYOUSAFE
           </Text>
         </Block>
         <Block factor={1.0}>

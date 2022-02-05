@@ -10,8 +10,10 @@ import state from "../store"
 
 const dummy = new Object3D()
 export default function Diamonds() {
-  const { nodes } = useLoader(GLTFLoader, "/diamond.glb")
-  useLayoutEffect(() => nodes.pCone1_lambert1_0.geometry.center(), [])
+  const { nodes } = useLoader(GLTFLoader, "/cross.glb")
+  useLayoutEffect(() => nodes.Box001__0.geometry.center(), [])
+  // const { nodes } = useLoader(GLTFLoader, "/diamond.glb")
+  // useLayoutEffect(() => nodes.pCone1_lambert1_0.geometry.center(), [])
 
   const { size, gl, scene, camera, clock } = useThree()
   const { contentMaxWidth, sectionHeight, mobile } = useBlock()
@@ -34,11 +36,11 @@ export default function Diamonds() {
     state.diamonds.forEach((data, i) => {
       const t = clock.getElapsedTime() / 2
       const { x, offset, scale, factor } = data
+      // const s = (contentMaxWidth / 500) * scale
       const s = (contentMaxWidth / 35) * scale
       data.pos.set(mobile ? 0 : x, lerp(data.pos.y, -sectionHeight * offset * factor + (state.top.current / state.zoom) * factor, 0.1), 0)
       dummy.position.copy(data.pos)
-      if (i === state.diamonds.length - 1) dummy.rotation.set(0, t, 0)
-      else dummy.rotation.set(t, t, t)
+      dummy.rotation.set(t, t, t)
       dummy.scale.set(s, s, s)
       dummy.updateMatrix()
       model.current.setMatrixAt(i, dummy.matrix)
@@ -65,5 +67,6 @@ export default function Diamonds() {
     gl.render(scene, camera)
   }, 1)
 
-  return <instancedMesh ref={model} layers={1} args={[nodes.pCone1_lambert1_0.geometry, null, state.diamonds.length]} position={[0, 0, 50]} />
+  return <instancedMesh ref={model} layers={1} args={[nodes.Box001__0.geometry, null, state.diamonds.length]} position={[0, 0, 50]} />
+  // return <instancedMesh ref={model} layers={1} args={[nodes.pCone1_lambert1_0.geometry, null, state.diamonds.length]} position={[0, 0, 50]} />
 }
